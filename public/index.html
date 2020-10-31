@@ -93,7 +93,7 @@
             </div>
     
             <div class="text-box">
-                <h1>Free</h1>
+                <h1>Chart</h1>
                 <p>
                     <canvas id = "myChart" width="400" height="400"></canvas>
                 </p>
@@ -117,15 +117,7 @@
             datasets: [
                 {
                     data: [],
-                    backgroundColor: [
-                        '#ffcd56',
-                        '#ff6384',
-                        '#36a2eb',
-                        '#ff0aad',
-                        '#5252d1',
-                        '#f75252',
-                        '#42f551',
-                    ],
+                    backgroundColor: [],
                 }
             ],
             labels: []
@@ -142,9 +134,10 @@
         function getBudget() {
             axios.get('/budget')
             .then(function (res) {
-                console.log(res.data);
+                console.log(res);
                 for (var i = 0; i < res.data.length; i++) {
                     data.datasets[0].data[i] = res.data[i].budget;
+                    data.datasets[0].backgroundColor[i] = res.data[i].color;
                     data.labels[i] = res.data[i].title;
                 }
                 createChart();
